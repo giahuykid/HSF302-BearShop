@@ -1,4 +1,4 @@
-package com.hsf302.shopbear;
+package com.hsf302.shopbear.main;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
