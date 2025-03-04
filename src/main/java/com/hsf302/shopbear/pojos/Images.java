@@ -1,4 +1,4 @@
 package com.hsf302.shopbear.pojos;
 
-public class images {
+public class Images {
 }
