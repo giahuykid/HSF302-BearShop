@@ -1,7 +1,16 @@
 package com.hsf302.shopbear.pojos;
 
-public class Users {
+import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name = "Users")
+public class Users {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long userId;
     private String username;
     private String password;
@@ -9,6 +18,8 @@ public class Users {
     private String phoneNumber;
     private String role;
     private String address;
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Orders> orders = new HashSet<>();
 
     public Users() {
     }

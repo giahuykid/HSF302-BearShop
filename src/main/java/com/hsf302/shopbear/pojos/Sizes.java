@@ -1,10 +1,28 @@
 package com.hsf302.shopbear.pojos;
 
-public class Sizes {
+import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "Sizes")
+public class Sizes {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int sizeId;
     private Long productId;
     private String sizeName;
+
+    @ManyToMany(mappedBy = "size")
+    private Set<Products> teddyBears = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "Sizes_Colors",
+            joinColumns = @JoinColumn(name = "size_id"),
+            inverseJoinColumns = @JoinColumn(name = "color_id")
+    )
+    private Set<Colors> color = new HashSet<>();
 
     public Sizes() {
     }

@@ -1,9 +1,17 @@
 package com.hsf302.shopbear.pojos;
 
-public class Products {
+import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+@Entity
+@Table(name = "Users")
+public class Products {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long productId;
-    private int categoryId;
     private String productName;
     private double productPrice;
     private int colorId;
@@ -14,10 +22,24 @@ public class Products {
 
     public Products() {
     }
+    @ManyToMany
+    @JoinTable(
+            name = "TeddyBears_Sizes",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "size_id"))
+    private Set<Sizes> size = new HashSet<>();
 
-    public Products(Long productId, int categoryId, String productName, double productPrice, int colorId, String productBrand, String createdDate, String material, int sizeId) {
-        this.productId = productId;
-        this.categoryId = categoryId;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Images> images = new HashSet<>();
+
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<OrderDetails> orderDetail = new HashSet<>();
+
+    @OneToOne
+    @JoinColumn(name = "categories_id",referencedColumnName = "id")
+    private Categories category;
+
+    public Products(String productName, double productPrice, int colorId, String productBrand, String createdDate, String material, int sizeId, Categories category) {
         this.productName = productName;
         this.productPrice = productPrice;
         this.colorId = colorId;
@@ -25,6 +47,15 @@ public class Products {
         this.createdDate = createdDate;
         this.material = material;
         this.sizeId = sizeId;
+        this.category = category;
+    }
+
+    public Categories getCategory() {
+        return category;
+    }
+
+    public void setCategory(Categories category) {
+        this.category = category;
     }
 
     public Long getProductId() {
@@ -35,13 +66,6 @@ public class Products {
         this.productId = productId;
     }
 
-    public int getCategoryId() {
-        return categoryId;
-    }
-
-    public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
-    }
 
     public String getProductName() {
         return productName;

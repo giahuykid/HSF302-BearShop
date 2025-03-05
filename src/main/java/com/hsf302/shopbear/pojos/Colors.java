@@ -1,10 +1,20 @@
 package com.hsf302.shopbear.pojos;
 
-public class Colors {
+import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
+@Entity
+@Table(name = "Colors")
+public class Colors {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int colorId;
     private int sizeId;
     private String colorName;
+    @ManyToMany(mappedBy = "color")
+    private Set<Sizes> size = new HashSet<>();
 
     public Colors() {
     }

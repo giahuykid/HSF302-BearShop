@@ -1,22 +1,52 @@
 package com.hsf302.shopbear.pojos;
 
-public class OrderDetails {
+import jakarta.persistence.*;
 
+@Entity
+@Table(name = "OrderDetails")
+public class OrderDetails {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderDetailId;
     private Long orderId;
     private Long productId;
     private int quantity;
     private double price;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Products products;
+
+    @ManyToOne
+    @JoinColumn(name = "order_id", nullable = false)
+    private Orders orders ;
+
     public OrderDetails() {
     }
 
-    public OrderDetails(Long orderDetailId, Long orderId, Long productId, int quantity, double price) {
-        this.orderDetailId = orderDetailId;
+    public OrderDetails(Long orderId, Long productId, int quantity, double price, Products products, Orders orders) {
         this.orderId = orderId;
         this.productId = productId;
         this.quantity = quantity;
         this.price = price;
+        this.products = products;
+        this.orders = orders;
+    }
+
+    public Products getProducts() {
+        return products;
+    }
+
+    public void setProducts(Products products) {
+        this.products = products;
+    }
+
+    public Orders getOrders() {
+        return orders;
+    }
+
+    public void setOrders(Orders orders) {
+        this.orders = orders;
     }
 
     public Long getOrderDetailId() {
