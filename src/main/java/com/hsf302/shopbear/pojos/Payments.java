@@ -7,8 +7,7 @@ import jakarta.persistence.*;
 public class Payments {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long paymentId;
-    private Long orderId;
+    private Long id;
     private String paymentType;
     private String paymentStatus;
     private String paymentLocation;
@@ -19,9 +18,8 @@ public class Payments {
     public Payments() {
     }
 
-    public Payments(Long paymentId, Long orderId, String paymentType, String paymentStatus, String paymentLocation, Orders order) {
-        this.paymentId = paymentId;
-        this.orderId = orderId;
+    public Payments(Long id, String paymentType, String paymentStatus, String paymentLocation, Orders order) {
+        this.id = id;
         this.paymentType = paymentType;
         this.paymentStatus = paymentStatus;
         this.paymentLocation = paymentLocation;
@@ -37,19 +35,11 @@ public class Payments {
     }
 
     public Long getPaymentId() {
-        return paymentId;
+        return id;
     }
 
     public void setPaymentId(Long paymentId) {
-        this.paymentId = paymentId;
-    }
-
-    public Long getOrderId() {
-        return orderId;
-    }
-
-    public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+        this.id = id;
     }
 
     public String getPaymentType() {

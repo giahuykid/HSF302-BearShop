@@ -11,7 +11,6 @@ public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderId;
-    private Long userId;
     private String orderDate;
     private String sumPrice;
     private String orderStatus;
@@ -20,20 +19,20 @@ public class Orders {
     @JoinColumn(name = "user_id", nullable = false)
     private Users user;
 
-    @OneToMany(mappedBy = "Order", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetails> orderDetail = new HashSet<>();
 
     @OneToOne
-    @JoinColumn(name = "payment_id",referencedColumnName = "id")
+    @JoinColumn(name = "payment_id")
     private Payments payment;
 
 
     public Orders() {
     }
 
-    public Orders(Long orderId, Long userId, String orderDate, String sumPrice, String orderStatus, Users user, Payments payment) {
+    public Orders(Long orderId, String orderDate, String sumPrice, String orderStatus, Users user, Payments payment) {
         this.orderId = orderId;
-        this.userId = userId;
+
         this.orderDate = orderDate;
         this.sumPrice = sumPrice;
         this.orderStatus = orderStatus;
@@ -65,13 +64,6 @@ public class Orders {
         this.orderId = orderId;
     }
 
-    public Long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 
     public String getOrderDate() {
         return orderDate;

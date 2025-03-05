@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Categories {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int categoryId;
+    private int id;
     private String categoryName;
 
     @OneToOne(mappedBy = "category")
@@ -16,8 +16,8 @@ public class Categories {
     public Categories() {
     }
 
-    public Categories(int categoryId, String categoryName) {
-        this.categoryId = categoryId;
+    public Categories(int idd, String categoryName) {
+        this.id = id;
         this.categoryName = categoryName;
     }
 
@@ -30,11 +30,11 @@ public class Categories {
     }
 
     public int getCategoryId() {
-        return categoryId;
+        return id;
     }
 
     public void setCategoryId(int categoryId) {
-        this.categoryId = categoryId;
+        this.id = id;
     }
 
     public String getCategoryName() {
