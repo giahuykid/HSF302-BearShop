@@ -10,7 +10,7 @@ import java.util.Set;
 public class Sizes {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int sizeId;
+    private int id;
     private Long productId;
     private String sizeName;
 
@@ -27,18 +27,18 @@ public class Sizes {
     public Sizes() {
     }
 
-    public Sizes(int sizeId, Long productId, String sizeName) {
-        this.sizeId = sizeId;
+    public Sizes(int id, Long productId, String sizeName) {
+        this.id = id;
         this.productId = productId;
         this.sizeName = sizeName;
     }
 
     public int getSizeId() {
-        return sizeId;
+        return id;
     }
 
-    public void setSizeId(int sizeId) {
-        this.sizeId = sizeId;
+    public void setSizeId(int id) {
+        this.id = id;
     }
 
     public Long getProductId() {

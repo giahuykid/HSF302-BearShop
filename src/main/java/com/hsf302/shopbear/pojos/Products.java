@@ -11,7 +11,7 @@ import java.util.Set;
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long productId;
+    private Long id;
     private String productName;
     private double productPrice;
     private String productBrand;
@@ -64,11 +64,11 @@ public class Products {
     }
 
     public Long getProductId() {
-        return productId;
+        return id;
     }
 
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setProductId(Long id) {
+        this.id = id;
     }
 
 
