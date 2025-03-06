@@ -14,11 +14,10 @@ public class Products {
     private Long productId;
     private String productName;
     private double productPrice;
-    private int colorId;
     private String productBrand;
     private String createdDate;
     private String material;
-    private int sizeId;
+
 
     public Products() {
     }
@@ -39,15 +38,21 @@ public class Products {
     @JoinColumn(name = "categories_id",referencedColumnName = "id")
     private Categories category;
 
-    public Products(String productName, double productPrice, int colorId, String productBrand, String createdDate, String material, int sizeId, Categories category) {
+    public Products(String productName, double productPrice, String productBrand, String createdDate, String material, Categories category) {
         this.productName = productName;
         this.productPrice = productPrice;
-        this.colorId = colorId;
         this.productBrand = productBrand;
         this.createdDate = createdDate;
         this.material = material;
-        this.sizeId = sizeId;
         this.category = category;
+    }
+
+    public Products(String productName, double productPrice, String productBrand, String createdDate, String material) {
+        this.productName = productName;
+        this.productPrice = productPrice;
+        this.productBrand = productBrand;
+        this.createdDate = createdDate;
+        this.material = material;
     }
 
     public Categories getCategory() {
@@ -83,13 +88,6 @@ public class Products {
         this.productPrice = productPrice;
     }
 
-    public int getColorId() {
-        return colorId;
-    }
-
-    public void setColorId(int colorId) {
-        this.colorId = colorId;
-    }
 
     public String getProductBrand() {
         return productBrand;
@@ -115,12 +113,5 @@ public class Products {
         this.material = material;
     }
 
-    public int getSizeId() {
-        return sizeId;
-    }
-
-    public void setSizeId(int sizeId) {
-        this.sizeId = sizeId;
-    }
 
 }
