@@ -8,7 +8,8 @@ import org.springframework.context.annotation.ComponentScan;
 
 @EntityScan(basePackages = "com.hsf302.shopbear.pojos")
 @SpringBootApplication
-@ComponentScan({ "com.hsf302.shopbear.controller"})
+@ComponentScan({ "com.hsf302.shopbear.controller","com.hsf302.shopbear.service"})
+
 
 public class ShopBearApplication {
 
