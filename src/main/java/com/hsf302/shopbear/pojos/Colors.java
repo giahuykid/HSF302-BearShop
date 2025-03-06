@@ -10,8 +10,7 @@ import java.util.Set;
 public class Colors {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int colorId;
-    private int sizeId;
+    private int id;
     private String colorName;
     @ManyToMany(mappedBy = "color")
     private Set<Sizes> size = new HashSet<>();
@@ -19,27 +18,20 @@ public class Colors {
     public Colors() {
     }
 
-    public Colors(int colorId, int sizeId, String colorName) {
-        this.colorId = colorId;
-        this.sizeId = sizeId;
+    public Colors(int id, String colorName) {
+        this.id = id;
+
         this.colorName = colorName;
     }
 
     public int getColorId() {
-        return colorId;
+        return id;
     }
 
-    public void setColorId(int colorId) {
-        this.colorId = colorId;
+    public void setColorId(int id) {
+        this.id = id;
     }
 
-    public int getSizeId() {
-        return sizeId;
-    }
-
-    public void setSizeId(int sizeId) {
-        this.sizeId = sizeId;
-    }
 
     public String getColorName() {
         return colorName;

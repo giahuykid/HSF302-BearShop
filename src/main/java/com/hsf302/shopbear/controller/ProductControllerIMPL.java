@@ -18,8 +18,10 @@ public class ProductControllerIMPL implements ProductController {
     @GetMapping("/manageProduct")
     public ModelAndView manageProduct() {
         ModelAndView modelAndView = new ModelAndView("manageProductjsp");
+        modelAndView.addObject("products", productService.getAllProducts());
         return modelAndView;
     }
+
 
     @Override
     @PostMapping("/manageProductaction")
@@ -53,6 +55,6 @@ public class ProductControllerIMPL implements ProductController {
                 break;
 
         }
-        return null;
+        return "redirect:/manageProduct";
     }
 }

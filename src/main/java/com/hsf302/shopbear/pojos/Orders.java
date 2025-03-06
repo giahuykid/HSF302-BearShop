@@ -10,7 +10,7 @@ import java.util.Set;
 public class Orders {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderId;
+    private Long id;
     private String orderDate;
     private String sumPrice;
     private String orderStatus;
@@ -30,8 +30,8 @@ public class Orders {
     public Orders() {
     }
 
-    public Orders(Long orderId, String orderDate, String sumPrice, String orderStatus, Users user, Payments payment) {
-        this.orderId = orderId;
+    public Orders(Long id, String orderDate, String sumPrice, String orderStatus, Users user, Payments payment) {
+        this.id = id;
 
         this.orderDate = orderDate;
         this.sumPrice = sumPrice;
@@ -57,11 +57,11 @@ public class Orders {
     }
 
     public Long getOrderId() {
-        return orderId;
+        return id;
     }
 
     public void setOrderId(Long orderId) {
-        this.orderId = orderId;
+        this.id = id;
     }
 
 

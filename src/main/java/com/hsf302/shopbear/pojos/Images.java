@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class Images {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long imageId;
+    private Long id;
     private String imagePath;
 
     public Images() {
@@ -16,14 +16,14 @@ public class Images {
     @JoinColumn(name = "product_id",nullable = false)
     private Products product;
 
-    public Images(Long imageId, String imagePath, Products product) {
-        this.imageId = imageId;
+    public Images(Long id, String imagePath, Products product) {
+        this.id = id;
         this.imagePath = imagePath;
         this.product = product;
     }
 
-    public Images(Long imageId, String imagePath) {
-        this.imageId = imageId;
+    public Images(Long id, String imagePath) {
+        this.id = id;
 
         this.imagePath = imagePath;
     }
@@ -37,11 +37,11 @@ public class Images {
     }
 
     public Long getImageId() {
-        return imageId;
+        return id;
     }
 
     public void setImageId(Long imageId) {
-        this.imageId = imageId;
+        this.id = id;
     }
 
 

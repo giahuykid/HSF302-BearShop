@@ -7,7 +7,7 @@ import jakarta.persistence.*;
 public class OrderDetails {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderDetailId;
+    private Long id;
     private int quantity;
     private double price;
 
@@ -47,11 +47,11 @@ public class OrderDetails {
     }
 
     public Long getOrderDetailId() {
-        return orderDetailId;
+        return id;
     }
 
     public void setOrderDetailId(Long orderDetailId) {
-        this.orderDetailId = orderDetailId;
+        this.id = id;
     }
 
     public int getQuantity() {

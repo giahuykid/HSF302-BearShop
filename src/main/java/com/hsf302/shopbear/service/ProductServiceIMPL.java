@@ -5,6 +5,9 @@ import com.hsf302.shopbear.repositories.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+import java.util.Set;
+
 @Service
 public class ProductServiceIMPL  implements ProductService{
 
@@ -19,7 +22,13 @@ public class ProductServiceIMPL  implements ProductService{
     }
 
     @Override
-    public Products check(long id) {
-        return productRepository.findById(id).orElse(null);
+    public Products check(long productId) {
+        return productRepository.findById(productId).orElse(null);
     }
+
+    @Override
+    public List<Products> getAllProducts() {
+        return productRepository.findAll();
+    }
+
 }
