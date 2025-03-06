@@ -38,5 +38,5 @@ public class Sizes {
     public void setSizeName(String sizeName) {
         this.sizeName = sizeName;
     }
-    
+
 }
