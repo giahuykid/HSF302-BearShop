@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+                <html xmlns:th="http://www.thymeleaf.org" lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <title>Bear Shop</title>
+                    <link rel="stylesheet" th:href="@{/css/style.css}">
+                </head>
+                <body>
+                    <div class="header">
+                        <div>
+                            <th:block th:if="${session.user}">
+                                <a href="/profile"><button class="login-button">Profile</button></a>
+                                <form th:action="@{/logout}" method="post" style="display: inline;">
+                                    <button type="submit" class="login-button">Logout</button>
+                                </form>
+                            </th:block>
+                            <th:block th:unless="${session.user}">
+                                <a href="/login"><button class="login-button">Login</button></a>
+                            </th:block>
+                        </div>
+                        <form class="search-form" action="/" method="get">
+                            <input type="text" name="search" class="search-input" placeholder="Search products...">
+                            <button type="submit" class="search-button">Search</button>
+                        </form>
+                    </div>
+
+                    <div class="product-grid">
+                        <div th:each="product : ${products}" class="product-card">
+                            <a th:href="@{/product/{id}(id=${product.productId})}" style="text-decoration: none; color: inherit;">
+                                <img class="product-image"
+                                     th:src="@{${product.productId == 1 ? '/images/panda.jpg' : '/images/freddy.jpg'}}"
+                                     th:alt="${product.productId == 1 ? 'Panda Bear' : 'Freddy Bear'}">
+                                <div class="product-info">
+                                    <h2 th:text="${product.productName}">Product Name</h2>
+                                    <p>🏷️ <span th:text="${product.productBrand}">Brand</span></p>
+                                    <p>🧸 <span th:text="${product.material}">Material</span></p>
+                                    <h3 th:text="${#numbers.formatDecimal(product.productPrice, 0, 'COMMA', 0, 'POINT') + 'đ'}">Price</h3>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+
+                </body>
+                </html>

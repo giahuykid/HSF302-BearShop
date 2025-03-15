@@ -30,5 +30,19 @@ public class ProductServiceIMPL  implements ProductService{
     public List<Products> getAllProducts() {
         return productRepository.findAll();
     }
+    @Override
+    public Products updateProduct(Products product) {
+        if (check(product.getProductId()) != null) {
+            return productRepository.save(product);
+        }
+        return null;
+    }
+
+    @Override
+    public void deleteProduct(long productId) {
+        if (check(productId) != null) {
+            productRepository.deleteById(Math.toIntExact(productId));
+        }
+    }
 
 }

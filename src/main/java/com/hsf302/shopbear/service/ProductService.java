@@ -9,4 +9,6 @@ public interface ProductService {
     public Products createProduct(Products products);
     public Products check(long productId);
     public List<Products> getAllProducts();
+    public Products updateProduct(Products product);
+    public void deleteProduct(long productId);
 }
