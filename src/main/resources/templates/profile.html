@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+            <html xmlns:th="http://www.thymeleaf.org" lang="en">
+            <head>
+                <meta charset="UTF-8">
+                <title>Profile - Bear Shop</title>
+                <link rel="stylesheet" th:href="@{/css/style.css}">
+                <link rel="stylesheet" th:href="@{/css/profile.css}">
+            </head>
+            <body>
+                <div class="header">
+                    <div>
+                        <a href="/"><button class="login-button">Home</button></a>
+                        <form th:action="@{/logout}" method="post" style="display: inline;">
+                            <button type="submit" class="login-button">Logout</button>
+                        </form>
+                    </div>
+                </div>
+
+                <div class="profile-container">
+                    <div class="profile-header">
+                        <h1>Profile Information</h1>
+                    </div>
+                    <div class="profile-info">
+                        <div class="info-row">
+                            <div class="info-label">Username:</div>
+                            <div class="info-value" th:text="${user.username}">Username</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Full Name:</div>
+                            <div class="info-value" th:text="${user.fullName}">Full Name</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Phone:</div>
+                            <div class="info-value" th:text="${user.phoneNumber}">Phone Number</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Role:</div>
+                            <div class="info-value" th:text="${user.role}">Role</div>
+                        </div>
+                        <div class="info-row">
+                            <div class="info-label">Address:</div>
+                            <div class="info-value" th:text="${user.address}">Address</div>
+                        </div>
+                    </div>
+                </div>
+            </body>
+            </html>

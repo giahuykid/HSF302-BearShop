@@ -48,10 +48,10 @@ public class ProductControllerIMPL implements ProductController {
                 productService.createProduct(product);
                 break;
             case "update":
-
+                productService.updateProduct(product);
                 break;
             case "delete":
-
+                productService.deleteProduct(product.getProductId());
                 break;
 
         }
