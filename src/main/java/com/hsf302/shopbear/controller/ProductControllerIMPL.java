@@ -23,38 +23,5 @@ public class ProductControllerIMPL implements ProductController {
     }
 
 
-    @Override
-    @PostMapping("/manageProductaction")
-    public String manageProduct(HttpServletRequest request) {
-        String action = request.getParameter("btnManageProduct");
-        String productName = request.getParameter("txtproductName");
-        String productPriceStr = request.getParameter("txtproductPrice");
-        double productPrice = 0.0;
 
-        if (productPriceStr != null && !productPriceStr.isEmpty()) {
-            try {
-                productPrice = Double.parseDouble(productPriceStr);
-            } catch (NumberFormatException e) {
-                System.out.println("Lỗi: Giá sản phẩm không hợp lệ!");
-            }
-        }
-
-        String productBrand = request.getParameter("txtproductBrand");
-        String createdDate = request.getParameter("txtcreatedDate");
-        String material = request.getParameter("txtmaterial");
-        Products product = new Products(productName,productPrice,productBrand,createdDate,material);
-        switch (action) {
-            case "add":
-                productService.createProduct(product);
-                break;
-            case "update":
-                productService.updateProduct(product);
-                break;
-            case "delete":
-                productService.deleteProduct(product.getProductId());
-                break;
-
-        }
-        return "redirect:/manageProduct";
-    }
 }

@@ -34,18 +34,10 @@ public class Products {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetails> orderDetail = new HashSet<>();
 
-    @OneToOne
-    @JoinColumn(name = "categories_id",referencedColumnName = "id")
-    private Categories category;
+    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Categories> category = new HashSet<>();
 
-    public Products(String productName, double productPrice, String productBrand, String createdDate, String material, Categories category) {
-        this.productName = productName;
-        this.productPrice = productPrice;
-        this.productBrand = productBrand;
-        this.createdDate = createdDate;
-        this.material = material;
-        this.category = category;
-    }
+
 
     public Products(String productName, double productPrice, String productBrand, String createdDate, String material) {
         this.productName = productName;
@@ -55,19 +47,43 @@ public class Products {
         this.material = material;
     }
 
-    public Categories getCategory() {
+    public Set<Sizes> getSize() {
+        return size;
+    }
+
+    public void setSize(Set<Sizes> size) {
+        this.size = size;
+    }
+
+    public Set<Images> getImages() {
+        return images;
+    }
+
+    public void setImages(Set<Images> images) {
+        this.images = images;
+    }
+
+    public Set<OrderDetails> getOrderDetail() {
+        return orderDetail;
+    }
+
+    public void setOrderDetail(Set<OrderDetails> orderDetail) {
+        this.orderDetail = orderDetail;
+    }
+
+    public Set<Categories> getCategory() {
         return category;
     }
 
-    public void setCategory(Categories category) {
+    public void setCategory(Set<Categories> category) {
         this.category = category;
     }
 
-    public Long getProductId() {
+    public Long getId() {
         return id;
     }
 
-    public void setProductId(Long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

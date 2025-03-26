@@ -10,23 +10,33 @@ public class Categories {
     private int id;
     private String categoryName;
 
-    @OneToOne(mappedBy = "category")
-    private Products products;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", nullable = false)
+    private Products product;
 
     public Categories() {
     }
 
-    public Categories(int idd, String categoryName) {
+    public Categories(int id, String categoryName, Products product) {
         this.id = id;
         this.categoryName = categoryName;
+        this.product = product;
     }
 
-    public Products getProducts() {
-        return products;
+    public int getId() {
+        return id;
     }
 
-    public void setProducts(Products products) {
-        this.products = products;
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
     }
 
     public int getCategoryId() {
