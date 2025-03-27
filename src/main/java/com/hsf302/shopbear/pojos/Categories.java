@@ -10,24 +10,23 @@ public class Categories {
     private int id;
     private String categoryName;
 
-    @OneToOne(mappedBy = "category")
-    private Products products;
 
     public Categories() {
     }
 
-    public Categories(int idd, String categoryName) {
+    public Categories(int id, String categoryName) {
         this.id = id;
         this.categoryName = categoryName;
     }
 
-    public Products getProducts() {
-        return products;
+    public int getId() {
+        return id;
     }
 
-    public void setProducts(Products products) {
-        this.products = products;
+    public void setId(int id) {
+        this.id = id;
     }
+
 
     public int getCategoryId() {
         return id;

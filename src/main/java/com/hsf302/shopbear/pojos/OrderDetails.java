@@ -18,16 +18,64 @@ public class OrderDetails {
     @ManyToOne
     @JoinColumn(name = "order_id", nullable = false)
     private Orders order ;
+    @ManyToOne
+    @JoinColumn(name = "size_id", nullable = false)
+    private Sizes size;
 
+    @ManyToOne
+    @JoinColumn(name = "color_id", nullable = false)
+    private Colors color;
     public OrderDetails() {
     }
 
-    public OrderDetails( int quantity, double price, Products products, Orders orders) {
-
+    public OrderDetails(Long id, int quantity, double price, Products product, Orders order, Sizes size, Colors color) {
+        this.id = id;
         this.quantity = quantity;
         this.price = price;
-        this.product = products;
-        this.order = orders;
+        this.product = product;
+        this.order = order;
+        this.size = size;
+        this.color = color;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Products getProduct() {
+        return product;
+    }
+
+    public void setProduct(Products product) {
+        this.product = product;
+    }
+
+    public Orders getOrder() {
+        return order;
+    }
+
+    public void setOrder(Orders order) {
+        this.order = order;
+    }
+
+    public Sizes getSize() {
+        return size;
+    }
+
+    public void setSize(Sizes size) {
+        this.size = size;
+    }
+
+    public Colors getColor() {
+        return color;
+    }
+
+    public void setColor(Colors color) {
+        this.color = color;
     }
 
     public Products getProducts() {

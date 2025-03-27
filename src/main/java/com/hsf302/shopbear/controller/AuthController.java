@@ -32,26 +32,6 @@ package com.hsf302.shopbear.controller;
             private List<Products> initializeProducts() {
                 List<Products> productList = new ArrayList<>();
 
-                // Create Panda Bear
-                Products panda = new Products();
-                panda.setProductId(1L);
-                panda.setProductName("Giant Panda Bear");
-                panda.setProductBrand("BearWorld");
-                panda.setProductPrice(399000);
-                panda.setMaterial("Premium Plush");
-                panda.setCreatedDate("2024-03-20");
-                productList.add(panda);
-
-                // Create Freddy Bear
-                Products freddy = new Products();
-                freddy.setProductId(2L);
-                freddy.setProductName("Freddy Bear");
-                freddy.setProductBrand("TeddyLux");
-                freddy.setProductPrice(299000);
-                freddy.setMaterial("Soft Cotton");
-                freddy.setCreatedDate("2024-03-20");
-                productList.add(freddy);
-
                 return productList;
             }
 
@@ -121,7 +101,7 @@ package com.hsf302.shopbear.controller;
             @GetMapping("/product/{id}")
             public String productDetails(@PathVariable Long id, Model model) {
                 Products product = products.stream()
-                        .filter(p -> p.getProductId().equals(id))
+                        .filter(p -> p.getId().equals(id))
                         .findFirst()
                         .orElse(null);
 
