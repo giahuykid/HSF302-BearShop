@@ -10,5 +10,7 @@ import java.util.Set;
 
 public interface ProductRepository extends JpaRepository<Products, Integer> {
     Optional<Products> findById(Long id);
+    List<Products> findByProductNameContainingIgnoreCase(String keyword);
+
 
 }

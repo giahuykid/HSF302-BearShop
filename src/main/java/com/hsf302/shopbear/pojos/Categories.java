@@ -2,6 +2,9 @@ package com.hsf302.shopbear.pojos;
 
 import jakarta.persistence.*;
 
+import java.util.HashSet;
+import java.util.Set;
+
 @Entity
 @Table(name = "Categories")
 public class Categories {
@@ -10,8 +13,8 @@ public class Categories {
     private int id;
     private String categoryName;
 
-    @OneToOne(mappedBy = "category")
-    private Products products;
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Products> products = new HashSet<>();
 
     public Categories() {
     }
@@ -21,11 +24,11 @@ public class Categories {
         this.categoryName = categoryName;
     }
 
-    public Products getProducts() {
+    public Set<Products> getProducts() {
         return products;
     }
 
-    public void setProducts(Products products) {
+    public void setProducts(Set<Products> products) {
         this.products = products;
     }
 

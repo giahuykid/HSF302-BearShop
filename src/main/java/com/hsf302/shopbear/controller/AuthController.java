@@ -3,6 +3,7 @@ package com.hsf302.shopbear.controller;
         import com.hsf302.shopbear.pojos.Products;
         import com.hsf302.shopbear.pojos.Users;
         import com.hsf302.shopbear.service.AuthService;
+        import com.hsf302.shopbear.service.ProductService;
         import jakarta.servlet.http.HttpSession;
         import org.apache.catalina.User;
         import org.springframework.beans.factory.annotation.Autowired;
@@ -21,49 +22,24 @@ package com.hsf302.shopbear.controller;
         @Controller
         public class AuthController {
             private final AuthService authService;
-            private final List<Products> products;
+            private final ProductService productService;
 
-
-            public AuthController(AuthService authService) {
+            @Autowired
+            public AuthController(AuthService authService, ProductService productService) {
                 this.authService = authService;
-                this.products = initializeProducts();
-            }
-
-            private List<Products> initializeProducts() {
-                List<Products> productList = new ArrayList<>();
-
-                // Create Panda Bear
-                Products panda = new Products();
-                panda.setProductId(1L);
-                panda.setProductName("Giant Panda Bear");
-                panda.setProductBrand("BearWorld");
-                panda.setProductPrice(399000);
-                panda.setMaterial("Premium Plush");
-                panda.setCreatedDate("2024-03-20");
-                productList.add(panda);
-
-                // Create Freddy Bear
-                Products freddy = new Products();
-                freddy.setProductId(2L);
-                freddy.setProductName("Freddy Bear");
-                freddy.setProductBrand("TeddyLux");
-                freddy.setProductPrice(299000);
-                freddy.setMaterial("Soft Cotton");
-                freddy.setCreatedDate("2024-03-20");
-                productList.add(freddy);
-
-                return productList;
+                this.productService = productService;
             }
 
             @GetMapping("/")
             public String home(@RequestParam(required = false) String search, Model model, HttpSession session) {
-                List<Products> filteredProducts = products;
-                if (search != null && !search.isEmpty()) {
-                    filteredProducts = products.stream()
-                            .filter(p -> p.getProductName().toLowerCase().contains(search.toLowerCase()))
-                            .collect(Collectors.toList());
+                List<Products> products;
+                if (search != null && !search.trim().isEmpty()) {
+                    products = productService.findByProductNameContaining(search);
+                } else {
+                    products = productService.getAllProducts();
                 }
-                model.addAttribute("products", filteredProducts);
+                model.addAttribute("products", products);
+                model.addAttribute("search", search); // Preserve search term
                 return "home";
             }
 
@@ -74,24 +50,21 @@ package com.hsf302.shopbear.controller;
 
             @PostMapping("/login")
             public String login(@RequestParam String username,
-                                @RequestParam String password,
-                                HttpSession session,
-                                Model model) {
-
+                               @RequestParam String password,
+                               HttpSession session,
+                               Model model) {
                 Users user = authService.authenticate(username, password);
                 if (user != null) {
-                    // Store user info in session
                     session.setAttribute("user", user.getUsername());
                     session.setAttribute("role", user.getRole());
                     return "redirect:/";
-                } else {
-                    model.addAttribute("error", "Invalid username or password");
-                    return "login";
                 }
+                model.addAttribute("error", "Invalid username or password");
+                return "login";
             }
+
             @PostMapping("/logout")
             public String logout(HttpSession session) {
-                // Clear session
                 session.invalidate();
                 return "redirect:/";
             }
@@ -120,15 +93,10 @@ package com.hsf302.shopbear.controller;
 
             @GetMapping("/product/{id}")
             public String productDetails(@PathVariable Long id, Model model) {
-                Products product = products.stream()
-                        .filter(p -> p.getProductId().equals(id))
-                        .findFirst()
-                        .orElse(null);
-
+                Products product = productService.findById(id);
                 if (product == null) {
                     return "redirect:/";
                 }
-
                 model.addAttribute("product", product);
                 return "product";
             }

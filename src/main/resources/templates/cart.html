@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart - Bear Shop</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+    <div class="header">
+        <div>
+            <a href="/"><button class="login-button">Home</button></a>
+            <a href="/profile"><button class="login-button">Profile</button></a>
+            <form th:action="@{/logout}" method="post" style="display: inline;">
+                <button type="submit" class="login-button">Logout</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="product-details-container">
+        <div class="product-header">
+            <h1>Shopping Cart</h1>
+        </div>
+        <div th:if="${cartItems.empty}">
+            <p>Your cart is empty</p>
+        </div>
+        <div th:unless="${cartItems.empty}" class="product-info">
+            <div class="info-row" th:each="item : ${cartItems}">
+                <div class="info-label" th:text="${item.productName}">Product</div>
+                <div class="info-value" th:text="${#numbers.formatDecimal(item.productPrice, 0, 'COMMA', 0, 'POINT')+'đ'}">Price</div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

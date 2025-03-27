@@ -34,7 +34,7 @@ public class Products {
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetails> orderDetail = new HashSet<>();
 
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "categories_id",referencedColumnName = "id")
     private Categories category;
 
