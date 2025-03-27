@@ -10,17 +10,13 @@ public class Categories {
     private int id;
     private String categoryName;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "product_id", nullable = false)
-    private Products product;
 
     public Categories() {
     }
 
-    public Categories(int id, String categoryName, Products product) {
+    public Categories(int id, String categoryName) {
         this.id = id;
         this.categoryName = categoryName;
-        this.product = product;
     }
 
     public int getId() {
@@ -31,13 +27,6 @@ public class Categories {
         this.id = id;
     }
 
-    public Products getProduct() {
-        return product;
-    }
-
-    public void setProduct(Products product) {
-        this.product = product;
-    }
 
     public int getCategoryId() {
         return id;

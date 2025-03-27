@@ -13,15 +13,6 @@ public class Sizes {
     private int id;
     private String sizeName;
 
-    @ManyToMany(mappedBy = "size")
-    private Set<Products> teddyBears = new HashSet<>();
-    @ManyToMany
-    @JoinTable(
-            name = "Sizes_Colors",
-            joinColumns = @JoinColumn(name = "size_id"),
-            inverseJoinColumns = @JoinColumn(name = "color_id")
-    )
-    private Set<Colors> color = new HashSet<>();
 
     public Sizes() {
     }

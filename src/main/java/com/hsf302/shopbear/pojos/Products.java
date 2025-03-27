@@ -1,13 +1,18 @@
 package com.hsf302.shopbear.pojos;
 
 import jakarta.persistence.*;
+import lombok.Data;
+import org.springframework.format.annotation.DateTimeFormat;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
 @Entity
 @Table(name = "Products")
+@Data
 public class Products {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -15,53 +20,58 @@ public class Products {
     private String productName;
     private double productPrice;
     private String productBrand;
-    private String createdDate;
+    @DateTimeFormat(pattern = "yyyy-MM-dd") // Định dạng ngày tháng
+
+    private LocalDate createdDate;
     private String material;
+    private String status;
 
 
     public Products() {
     }
-    @ManyToMany
-    @JoinTable(
-            name = "TeddyBears_Sizes",
-            joinColumns = @JoinColumn(name = "product_id"),
-            inverseJoinColumns = @JoinColumn(name = "size_id"))
-    private Set<Sizes> size = new HashSet<>();
+    private String imagePath; // Lưu đường dẫn ảnh
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Images> images = new HashSet<>();
 
     @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<OrderDetails> orderDetail = new HashSet<>();
 
-    @OneToMany(mappedBy = "product", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<Categories> category = new HashSet<>();
+    @ManyToMany
+    @JoinTable(
+            name = "product_category",
+            joinColumns = @JoinColumn(name = "product_id"),
+            inverseJoinColumns = @JoinColumn(name = "category_id")
+    )
+    private Set<Categories> categories = new HashSet<>();
 
-
-
-    public Products(String productName, double productPrice, String productBrand, String createdDate, String material) {
+    public Products(Long id, String productName, double productPrice, String productBrand, LocalDate createdDate, String material, String status, String imagePath) {
+        this.id = id;
         this.productName = productName;
         this.productPrice = productPrice;
         this.productBrand = productBrand;
         this.createdDate = createdDate;
         this.material = material;
+        this.status = status;
+        this.imagePath = imagePath;
     }
 
-    public Set<Sizes> getSize() {
-        return size;
+    public String getStatus() {
+        return status;
     }
 
-    public void setSize(Set<Sizes> size) {
-        this.size = size;
+
+
+    public LocalDate getCreatedDate() {
+        return createdDate;
     }
 
-    public Set<Images> getImages() {
-        return images;
+    public void setCreatedDate(LocalDate createdDate) {
+        this.createdDate = createdDate;
     }
 
-    public void setImages(Set<Images> images) {
-        this.images = images;
+    public void setStatus(String status) {
+        this.status = status;
     }
+
 
     public Set<OrderDetails> getOrderDetail() {
         return orderDetail;
@@ -71,12 +81,12 @@ public class Products {
         this.orderDetail = orderDetail;
     }
 
-    public Set<Categories> getCategory() {
-        return category;
+    public Set<Categories> getCategories() {
+        return categories;
     }
 
-    public void setCategory(Set<Categories> category) {
-        this.category = category;
+    public void setCategories(Set<Categories> categories) {
+        this.categories = categories;
     }
 
     public Long getId() {
@@ -113,13 +123,7 @@ public class Products {
         this.productBrand = productBrand;
     }
 
-    public String getCreatedDate() {
-        return createdDate;
-    }
 
-    public void setCreatedDate(String createdDate) {
-        this.createdDate = createdDate;
-    }
 
     public String getMaterial() {
         return material;

@@ -12,8 +12,7 @@ public class Colors {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String colorName;
-    @ManyToMany(mappedBy = "color")
-    private Set<Sizes> size = new HashSet<>();
+
 
     public Colors() {
     }
